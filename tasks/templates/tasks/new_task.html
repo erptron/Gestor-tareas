@@ -1,0 +1,44 @@
+<!-- templates/tasks/new_task.html -->
+{% extends 'base.html' %}
+
+{% block title %}Crear nueva tarea{% endblock %}
+
+{% block content %}
+
+<div class='header_new'>
+    <label class="labeltitle">Crear nueva tarea</label>
+</div>
+
+<div class="container">
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <label for="id_project">Proyecto:</label>
+        <div class="form-group">
+            {{ form.project }}
+        </div>
+        <label for="id_project">Proyecto:</label>
+        <div class="form-group">
+            {{ form.project }}
+        </div>
+        <label for="title">Título:</label>
+        <div class="form-group">
+            {{ form.title }}
+        </div>
+        <label for="id_asignee">Persona asignada:</label>
+        <div class="form-group">
+            {{ form.asignee }}
+        </div>
+        <label for="description">Descripción tarea:</label>
+        <div class="form-group">
+            {{ form.description }}
+        </div>
+        <label for="state">Estado:</label>
+        <div class="form-group">
+            {{ form.state }}
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+<a href="{% url 'all_tasks' %}" class="btn btn-secondary">Volver a la lista de tareas</a>
+{% endblock %}

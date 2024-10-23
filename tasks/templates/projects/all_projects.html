@@ -1,0 +1,39 @@
+<!-- templates/projects/task_list.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Listado de proyectos{% endblock %}
+
+{% block content %}
+<div class="toolbar">
+    <label class="labeltitle">Listado de proyectos</label>
+    <div>
+        <a class="button_new" href="{% url 'new_project' %}">Nuevo proyecto</a>
+    </div>
+    <form id="changelist-search" method="get" role="search">
+        <div><!-- DIV needed for valid HTML -->
+            <label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search"></label>
+            <input type="text" size="40" name="q" value="" id="searchbar">
+            <input type="submit" value="Search">
+        </div>
+
+    </form>
+</div>
+
+<div class="titlerow">
+    <div>Proyecto</div>
+</div>
+
+{% for project in projects %}
+    <div class="row">
+        <div>
+            <a href="{% url 'task_list' project.id %}">{{ project.title }}</a>
+        </div>
+    </div>
+{% endfor %}
+{% if not projects %}
+
+    <div>No hay proyectos disponibles.</div>
+
+{% endif %}
+
+{% endblock %}

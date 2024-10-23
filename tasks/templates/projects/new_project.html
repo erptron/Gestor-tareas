@@ -1,0 +1,14 @@
+<!-- templates/tasks/new_project.html -->
+{% extends 'base.html' %}
+
+{% block title %}Nuevo proyecto{% endblock %}
+
+{% block content %}
+<h1>Nuevo proyecto</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- Muestra el formulario -->
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+<a href="{% url 'all_tasks' %}" class="btn btn-secondary">Volver a la lista de tareas</a>
+{% endblock %}

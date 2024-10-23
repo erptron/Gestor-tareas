@@ -1,0 +1,41 @@
+<!-- templates/projects/task_list.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Listado de tareas{{ project.name }}{% endblock %}
+
+{% block content %}
+<div class="toolbar">
+    <label class="labeltitle">Listado de tareas</label>
+    <div>
+        <a class="button_new" href="{% url 'new_task' %}">Nueva tarea</a>
+    </div>
+    <form id="changelist-search" method="get" role="search">
+        <div><!-- DIV needed for valid HTML -->
+            <label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search"></label>
+            <input type="text" size="40" name="q" value="" id="searchbar">
+            <input type="submit" value="Search">
+        </div>
+
+    </form>
+</div>
+
+<div class="titlerow">
+    <div style="width: 70%;">Título</div>
+    <div style="width: 20%;">Estado</div>
+</div>
+
+{% for task in tasks %}
+    <a href="{% url 'edit_task' task.id %}" style="text-decoration: none;">
+        <div class="row">
+            <div style="width: 70%;">{{ task.title }}</div>
+            <div style="width: 20%;">{{ task.state }}</div>
+
+        </div>
+    </a>
+{% endfor %}
+{% if not tasks %}
+    <div class="row">No hay tareas disponibles.</div>
+
+{% endif %}
+
+{% endblock %}

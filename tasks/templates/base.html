@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Para las gráficas -->
+    <title>Pantalla de Inicio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0.3em;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f5;
+            color: #333;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 10px;
+            margin-bottom: 15px;
+            border-top: 1px solid var(--hairline-color);
+            border-bottom: 1px solid var(--hairline-color);
+            background: var(--darkened-bg);
+            color: var(--body-quiet-color);
+        }
+        .form-group {
+            padding: 10px 10px;
+            min-width: 75%;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #343434;
+            padding: 5px 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .labeltitle {
+            color: #343434;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .button_new {
+            color: #343434;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #256AAD;
+            padding: 10px;
+            color: #FFF;
+            text-decoration: none;
+            background-color: #357ABD;
+            border-radius: 5px;
+
+        }
+        .button_new:hover {
+            background-color: #357A0D; /* Cambiar color al pasar el ratón */
+            border-radius: 5px;
+        }
+        .row {
+            border: 2px solid #343434;
+            border-radius: 5px;
+            color: #343434;
+            height: 1em;
+            font-size: 18px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0.25em 2em;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 10px rgba(50, 0, 0, 0.1);
+        }
+        .titlerow {
+            background-color: #343434;
+            border-radius: 5px;
+            color: #FFFFFF;
+            height: 1.5em;
+            font-size: 18px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0.1em 2em ;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 10px rgba(50, 0, 0, 0.1);
+        }
+        .body {
+            padding: 15px 10px;
+        }
+        .container {
+            max-width: 600px; /* Ancho máximo del formulario */
+            margin: auto; /* Centrar el formulario */
+            background: white; /* Fondo blanco */
+            padding: 20px; /* Espaciado interior */
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        .login {
+            max-height: 48px; /* Altura máxima del logo */
+        }
+        .navbar {
+            display: flex;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #357ABD; /* Cambiar color al pasar el ratón */
+            border-radius: 5px;
+        }
+        .chart{
+            padding-left: 20%;
+            max-height: 500px;
+            max-width: 80%;
+        }
+        .header_new {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px; /* Espacio entre grupos de formularios */
+        }
+        label {
+            display: block; /* Etiquetas en bloque */
+            margin-bottom: 5px; /* Espacio debajo de la etiqueta */
+            font-weight: bold; /* Negrita para las etiquetas */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo">
+        <a href="{% url 'inicio' %}">
+            <img src="{% static 'myproject/img/erptron.png' %}">
+        </a>
+    </div>
+    <div class="navbar">
+        <a href="{% url 'all_projects' %}">Proyectos</a>
+        <a href="{% url 'all_tasks' %}">Tareas</a>
+        <a href="{% url 'all_users' %}">Usuarios</a>
+    </div>
+</div>
+    <div class="body">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

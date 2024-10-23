@@ -1,0 +1,46 @@
+<!-- templates/tasks/all_users.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Listado de usuarios{% endblock %}
+
+{% block content %}
+
+<div class="toolbar">
+    <label class="labeltitle">Listado de usuarios</label>
+    <form id="changelist-search" method="get" role="search">
+        <div><!-- DIV needed for valid HTML -->
+            <label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search"></label>
+            <input type="text" size="40" name="q" value="" id="searchbar">
+            <input type="submit" value="Search">
+        </div>
+
+    </form>
+</div>
+
+<div class="headerwithbutton">
+    <div class="text-right">
+        <!-- <a class="button" href="{% url 'new_task' %}">Nueva tarea</a> -->
+    </div>
+</div>
+
+
+<div class="titlerow">
+    <div style="width: 50%;">Usuario</div>
+    <div style="width: 50%;">Email</div>
+</div>
+
+{% for user in users %}
+    <div class="row">
+        <div style="width: 50%;">{{ user.name }}</div>
+        <div style="width: 50%;">{{ user.email }}</div>
+
+    </div>
+{% endfor %}
+{% if not users %}
+    <div class="row">No hay usuarios disponibles.</div>
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+body {
+    margin: 0;                       /* Eliminar los márgenes por defecto */
+    font-family: Arial, sans-serif;  /* Fuente general */
+}
+
+.header {
+    display: flex;                   /* Usar flexbox para el contenedor de la cabecera */
+    justify-content: space-between;  /* Distribuir espacio entre los elementos */
+    align-items: center;             /* Centrar verticalmente los elementos */
+    padding: 50px 20px;              /* Espaciado interno */
+    background-color: #007bff;      /* Color de fondo de la cabecera */
+    color: white;                    /* Color del texto */
+}
+
+
+.menu {
+    display: flex;                   /* Usar flex para el menú */
+    gap: 120px;                       /* Espaciado entre las opciones del menú */
+}
+
+.menu a {
+    color: #000000;                    /* Color del enlace del menú */
+    text-decoration: none;           /* Sin subrayado */
+
+}
+
+.menu a:hover {
+    text-decoration: underline;      /* Subrayar al pasar el mouse */

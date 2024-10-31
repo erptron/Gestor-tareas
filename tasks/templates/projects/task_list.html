@@ -5,30 +5,41 @@
 
 {% block content %}
 <div class="toolbar">
-    <label class="labeltitle">Listado de tareas</label>
-    <div>
-        <a class="button_new" href="{% url 'new_task' %}">Nueva tarea</a>
-    </div>
-    <form id="changelist-search" method="get" role="search">
-        <div><!-- DIV needed for valid HTML -->
-            <label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search"></label>
-            <input type="text" size="40" name="q" value="" id="searchbar">
-            <input type="submit" value="Search">
+    <div class="in_line">
+        <div class="space">
+            <label class="labeltitle">Tareas</label>
         </div>
+        <div class="new">
+            <a class="addlink" href="{% url 'new_task' %}">Nuevo</a>
+        </div>
+    </div>
+    <div class="in_line">
+        <form id="changelist-search" method="get" role="search">
+            <div class="search">
+                <input type="text" size="40" name="q" value="" id="searchbar">
+                <input type="submit" value="Buscar">
+            </div>
 
-    </form>
+        </form>
+    </div>
 </div>
 
 <div class="titlerow">
-    <div style="width: 70%;">Título</div>
-    <div style="width: 20%;">Estado</div>
+    <div style="width: 5%;">Id</div>
+    <div style="width: 40%;">Título</div>
+    <div style="width: 25%;">Proyecto</div>
+    <div style="width: 20%;">Asignada</div>
+    <div style="width: 10%;">Estado</div>
 </div>
 
 {% for task in tasks %}
     <a href="{% url 'edit_task' task.id %}" style="text-decoration: none;">
         <div class="row">
-            <div style="width: 70%;">{{ task.title }}</div>
-            <div style="width: 20%;">{{ task.state }}</div>
+            <div style="width: 5%;">{{ task.id }}</div>
+            <div style="width: 40%;">{{ task.title }}</div>
+            <div style="width: 25%;">{{ task.project }}</div>
+            <div style="width: 20%;">{{ task.assignee }}</div>
+            <div style="width: 10%;">{{ task.state }}</div>
 
         </div>
     </a>

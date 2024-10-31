@@ -7,23 +7,21 @@
 {% block content %}
 
 <div class="toolbar">
-    <label class="labeltitle">Listado de usuarios</label>
-    <form id="changelist-search" method="get" role="search">
-        <div><!-- DIV needed for valid HTML -->
-            <label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search"></label>
-            <input type="text" size="40" name="q" value="" id="searchbar">
-            <input type="submit" value="Search">
+    <div class="in_line">
+        <div class="space">
+            <label class="labeltitle">Usuarios</label>
         </div>
+    </div>
+    <div class="in_line">
+        <form id="changelist-search" method="get" role="search">
+            <div class="search">
+                <input type="text" size="40" name="q" value="" id="searchbar">
+                <input type="submit" value="Buscar">
+            </div>
 
-    </form>
-</div>
-
-<div class="headerwithbutton">
-    <div class="text-right">
-        <!-- <a class="button" href="{% url 'new_task' %}">Nueva tarea</a> -->
+        </form>
     </div>
 </div>
-
 
 <div class="titlerow">
     <div style="width: 50%;">Usuario</div>

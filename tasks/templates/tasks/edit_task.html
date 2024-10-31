@@ -1,35 +1,51 @@
 <!-- templates/tasks/edit_task.html -->
 {% extends 'base.html' %}
-{% load static %}
-{% block title %}Editor de tareas{{ project.name }}{% endblock %}
+
+{% block title %}Editar tarea{% endblock %}
 
 {% block content %}
-<div class="body">
-    <h2>Tarea: {{ task.title }}</h2>
+
+<div class='header_new'>
+    <label class="labeltitle">Editar tarea "{{ task.title }}"</label>
+</div>
+
+<div class="container">
     <form method="post" novalidate>
         {% csrf_token %}
+        <div class="buttons_s">
+            <label for="title">Título:</label>
+            <a href="{% url 'new_subtask' task.id %}" style="text-decoration: none;">
+                Nueva sub tarea
+            </a>
+        </div>
+        <div class="form-group">
+            {{ form.title }}
+        </div>
         <label for="id_project">Proyecto:</label>
         <div class="form-group">
             {{ form.project }}
         </div>
-        <label for="title">Título:</label>
-        <div class="form-group">
-            {{ form.title }}
-        </div>
         <label for="id_asignee">Persona asignada:</label>
         <div class="form-group">
-            {{ form.asignee }}
+            {{ form.assignee }}
         </div>
         <label for="description">Descripción tarea:</label>
-        <div class="form-group">
+        <div>
             {{ form.description }}
         </div>
-        <label for="state">Estado:</label>
-        <div class="form-group">
+        <label for="id_state">Estado:</label>
+        <div>
             {{ form.state }}
         </div>
+        <label for="id_parent">Padre:</label>
+        <div>
+            {{ form.parent }}
+        </div>
         <br>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <div class="buttons_s">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" onclick="window.history.back();">Volver</button>
+        </div>
     </form>
 </div>
 

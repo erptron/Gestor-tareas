@@ -8,8 +8,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Para las gráficas -->
-    <title>Pantalla de Inicio</title>
+    <title>{% block title %}{% endblock %}</title>
     <style>
+        /* base.html */
+        .container {
+            max-width: 60%;
+            margin: auto; /* Centrar el formulario */
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
         body {
             margin: 0;
             padding: 0.3em;
@@ -17,89 +26,8 @@
             background-color: #f0f0f5;
             color: #333;
         }
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 10px;
-            margin-bottom: 15px;
-            border-top: 1px solid var(--hairline-color);
-            border-bottom: 1px solid var(--hairline-color);
-            background: var(--darkened-bg);
-            color: var(--body-quiet-color);
-        }
-        .form-group {
-            padding: 10px 10px;
-            min-width: 75%;
-        }
-        .header {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            background-color: #343434;
-            padding: 5px 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .labeltitle {
-            color: #343434;
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .button_new {
-            color: #343434;
-            font-size: 18px;
-            font-weight: bold;
-            border: 2px solid #256AAD;
-            padding: 10px;
-            color: #FFF;
-            text-decoration: none;
-            background-color: #357ABD;
-            border-radius: 5px;
-
-        }
-        .button_new:hover {
-            background-color: #357A0D; /* Cambiar color al pasar el ratón */
-            border-radius: 5px;
-        }
-        .row {
-            border: 2px solid #343434;
-            border-radius: 5px;
-            color: #343434;
-            height: 1em;
-            font-size: 18px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 0.25em 2em;
-            margin-bottom: 10px;
-            box-shadow: 0 10px 10px rgba(50, 0, 0, 0.1);
-        }
-        .titlerow {
-            background-color: #343434;
-            border-radius: 5px;
-            color: #FFFFFF;
-            height: 1.5em;
-            font-size: 18px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 0.1em 2em ;
-            margin-bottom: 10px;
-            box-shadow: 0 10px 10px rgba(50, 0, 0, 0.1);
-        }
         .body {
             padding: 15px 10px;
-        }
-        .container {
-            max-width: 600px; /* Ancho máximo del formulario */
-            margin: auto; /* Centrar el formulario */
-            background: white; /* Fondo blanco */
-            padding: 20px; /* Espaciado interior */
-            border-radius: 8px; /* Bordes redondeados */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-        }
-
-        .login {
-            max-height: 48px; /* Altura máxima del logo */
         }
         .navbar {
             display: flex;
@@ -114,6 +42,150 @@
             background-color: #357ABD; /* Cambiar color al pasar el ratón */
             border-radius: 5px;
         }
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #343434;
+            padding: 5px 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        /* Formularios */
+
+        .form_field {
+            min-width: 75%;
+        }
+        .form_line {
+            height: 2em;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5em 0em;
+            margin: 0 0.5em;
+        }
+        .form_buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .comemnt {
+            font-size: 14px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            padding: 0.4em;
+
+        }
+        .comment_date {
+            font-size: 12px;
+            color: #353ABD;
+            padding: 0.3em;
+        }
+        .comment_list {
+            list-style-type: none; /* Quita el punto de todos los <li> dentro de este <ul> */
+        }
+        .comment_li {
+            list-style-type: none; /* Quita el punto de todos los <li> dentro de este <ul> */
+            margin-left: -1.5em; /* (Opcional) Elimina el padding por defecto del <ul> */
+        }
+        /* Nivel 1 */
+        .comment_list > .comment_li {
+            border: 1px solid #30383f;
+            border-radius: 5px;
+            margin-bottom: 0.2em;
+        }
+
+        /* Nivel 2 */
+        .comment_list > .comment_li > .comment_list > .comment_li {
+            border: 1px solid #70787f;
+            border-radius: 5px;
+            margin-bottom: 0.2em;
+            margin-right: 0.2em;
+        }
+
+        /* Nivel 3 */
+        .comment_list > .comment_li > .comment_list > .comment_li > .comment_list > .comment_li {
+            border: 1px solid #80333f;
+            border-radius: 5px;
+            margin-bottom: 0.2em;
+        }
+
+
+        /* Listados */
+        .addlink {
+            padding-left: 16px;
+            background: url(static/gesproject/img/icon-addlink.svg) 0 1px no-repeat;
+        }
+        /*  */
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .labeltitle {
+            color: #343434;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .button_new {
+            color: #343434;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            color: #FFF;
+            text-decoration: none;
+            background-color: #357ABD;
+            border: 2px solid #256AAD;
+            border-radius: 5px;
+
+        }
+        .button_new:hover {
+            background-color: #357A0D; /* Cambiar color al pasar el ratón */
+            border-radius: 5px;
+        }
+        .row {
+            border-bottom: 1px solid #A4A4A4;
+            color: #343434;
+            height: 1em;
+            font-size: 18px;
+            display: flex;
+            justify-content: flex-start;
+            padding: 0.5em 2em;
+        }
+        .new {
+            padding: 5px;
+            font-size: 12px;
+        }
+        .new a {
+            padding-top: 2px;
+            color: #417893;
+            text-decoration: none;
+        }
+        .in_line {
+            height: 1em;
+            font-size: 22px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5em 0em;
+            margin: 0 0.5em;
+        }
+        .space {
+            margin-right: 1em;
+        }
+        .titlerow {
+            /*background-color: #343434;*/
+            height: 1.5em;
+            font-size: 18px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0.1em 2em ;
+            margin-bottom: 10px;
+            font-weight: bold; /* Negrita para las etiquetas */
+
+        }
+        .logo {
+            max-height: 48px; /* Altura máxima del logo */
+        }
         .chart{
             padding-left: 20%;
             max-height: 500px;
@@ -123,12 +195,12 @@
             text-align: center;
             margin-bottom: 20px;
         }
+        .search {
+            margin-top: -0.15em;
+        }
         h1 {
             text-align: center;
             margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px; /* Espacio entre grupos de formularios */
         }
         label {
             display: block; /* Etiquetas en bloque */
@@ -143,7 +215,7 @@
 <div class="header">
     <div class="logo">
         <a href="{% url 'inicio' %}">
-            <img src="{% static 'myproject/img/erptron.png' %}">
+            <img src="{% static 'gesproject/img/erptron.png' %}">
         </a>
     </div>
     <div class="navbar">

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar proyecto{% endblock %}
+
+{% block content %}
+
+<div class='header_new'>
+    <label class="labeltitle">Editar proyecto "{{ project.title }}"</label>
+</div>
+
+<div class="container">
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="form_line">
+            <div><label for="title">Título</label></div>
+        <div class="form_field">{{ form.title }}</div>
+        </div>
+
+        <div class="form_line">
+            <div><label for="id_type">Tipo:</label></div>
+            <div class="form_field">{{ form.type }}</div>
+        </div>
+
+        <div class="form_line">
+            <div><label for="id_state">Estado:</label></div>
+            <div class="form_field">{{ form.state }}</div>
+        </div>
+
+
+        <div class="form_line">
+            <div><label for="description">Descripción:</label></div>
+            <div class="form_field">{{ form.description }}</div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </form>
+
+    <br>
+
+<div class="toolbar">
+    <div class="in_line">
+        <div class="space">
+            <label class="labeltitle">Comentarios</label>
+        </div>
+        <div class="new">
+            <a class="addlink" href="{% url 'new_comment' %}">Nuevo</a>
+        </div>
+    </div>
+</div>
+
+<ul class="comment_list">
+    {% for comment_structure in comments_structure %}
+        {% include 'comment_tree.html' with comment_structure=comment_structure %}
+    {% empty %}
+        <li>No hay comentarios para este proyecto.</li>
+    {% endfor %}
+</ul>
+</div>
+
+<!-- Añadir jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Escuchar cambios en los campos del formulario
+        $('.form_field select, .form_field input, .form_field textarea').on('change', function() {
+            let projectId = "{{ project.id }}";
+            let fieldName = $(this).attr('name');
+            let newValue = $(this).val();
+
+            // Realizar solicitud AJAX
+            $.ajax({
+                url: "{% url 'update_project_field' %}",
+                type: "POST",
+                data: {
+                    'project_id': projectId,
+                    'field_name': fieldName,
+                    'new_value': newValue,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        console.log('Field updated successfully!');
+                    } else {
+                        console.log('Update failed: ' + response.error);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error: ', error);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

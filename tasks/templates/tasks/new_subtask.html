@@ -1,12 +1,12 @@
-<!-- templates/tasks/new_task.html -->
+<!-- templates/subtasks/new_subtask.html -->
 {% extends 'base.html' %}
 
-{% block title %}Crear nueva tarea{% endblock %}
+{% block title %}Crear nueva sub tarea{% endblock %}
 
 {% block content %}
 
 <div class='header_new'>
-    <label class="labeltitle">Crear nueva tarea</label>
+    <label class="labeltitle">Crear nueva sub tarea</label>
 </div>
 
 <div class="container">
@@ -15,20 +15,34 @@
         <label for="title">Título:</label>
         <div class="form-group">
             {{ form.title }}
+            {% if form.title.errors %}
+                <div class="error">{{ form.title.errors }}</div>
+            {% endif %}
         </div>
-        <label for="id_project">Proyecto:</label>
-        <div class="form-group">
-            {{ form.project }}
-        </div>
+
         <label for="id_asignee">Persona asignada:</label>
         <div class="form-group">
             {{ form.assignee }}
+            {% if form.title.errors %}
+                <div class="error">{{ form.title.errors }}</div>
+            {% endif %}
         </div>
         <label for="description">Descripción tarea:</label>
         <div>
             {{ form.description }}
+            {% if form.title.errors %}
+                <div class="error">{{ form.title.errors }}</div>
+            {% endif %}
+        </div>
+        <label for="parent">Tarea padre:</label>
+        <div>
+            {{ form.parent }}
+            {% if form.title.errors %}
+                <div class="error">{{ form.title.errors }}</div>
+            {% endif %}
         </div>
         <input type="hidden" name="state" value="2" />
+        <input type="hidden" name="id_project" value="{{ project_id }}">
         <br>
         <div class="buttons_s">
             <button type="submit" class="btn btn-primary">Guardar</button>

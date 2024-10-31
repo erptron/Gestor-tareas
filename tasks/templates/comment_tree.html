@@ -1,0 +1,15 @@
+<li class="comment_li">
+    <div class="comment_date">
+        {{ comment_structure.comment.creation_date|date:"d/m/Y H:i" }} {{ comment_structure.comment.user.name }}
+    </div>
+    <div class="comemnt">
+        {{ comment_structure.comment.description }}
+    </div>
+    {% if comment_structure.children %}
+        <ul class="comment_list">
+            {% for child in comment_structure.children %}
+                {% include 'comment_tree.html' with comment_structure=child %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>

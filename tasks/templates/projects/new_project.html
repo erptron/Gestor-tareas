@@ -1,14 +1,46 @@
 <!-- templates/tasks/new_project.html -->
 {% extends 'base.html' %}
 
-{% block title %}Nuevo proyecto{% endblock %}
+{% block title %}Crear proyecto{% endblock %}
 
 {% block content %}
-<h1>Nuevo proyecto</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}  <!-- Muestra el formulario -->
-    <button type="submit" class="btn btn-primary">Guardar</button>
-</form>
-<a href="{% url 'all_tasks' %}" class="btn btn-secondary">Volver a la lista de tareas</a>
+
+<div class='header_new'>
+    <label class="labeltitle">Crear proyecto</label>
+</div>
+
+<div class="container">
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <label for="title">Título:</label>
+        <div class="form-group">
+            {{ form.title }}
+            {% if form.title.errors %}
+                <div class="error">{{ form.title.errors }}</div>
+            {% endif %}
+        </div>
+        <label for="state">Estado:</label>
+        <div class="form-group">
+            {{ form.state }}
+            {% if form.state.errors %}
+                <div class="error">{{ form.state.errors }}</div>
+            {% endif %}
+        </div>
+        <label for="type">Título:</label>
+        <div class="form-group">
+            {{ form.type }}
+            {% if form.type.errors %}
+                <div class="error">{{ form.type.errors }}</div>
+            {% endif %}
+        </div>
+
+        <input type="hidden" name="state" value="2" />
+        <br>
+        <div class="buttons_s">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" onclick="window.history.back();">Volver</button>
+        </div>
+    </form>
+</div>
+
 {% endblock %}

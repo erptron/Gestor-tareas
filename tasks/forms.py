@@ -1,27 +1,81 @@
 # forms.py
 from django import forms
-from .models import Task
+from .models import Task, Project
+from ckeditor.widgets import CKEditorWidget
+
+imput_syle = {
+    'class': 'form-control',
+    'style': 'width: 100%; box-sizing: border-box;'
+}
 
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title', 'description', 'asignee', 'state', 'project']
+        fields = ['title', 'description', 'assignee', 'state', 'project', 'parent']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Título de la tarea'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descripción de la tarea', 'rows': 4}),
-            'asignee': forms.Select(attrs={'class': 'form-control'}),
-            'state': forms.Select(attrs={'class': 'form-control'}),
-            'project': forms.Select(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs=imput_syle),
+            'description': CKEditorWidget(),
+            'assignee': forms.Select(attrs=imput_syle),
+            'state': forms.Select(attrs=imput_syle),
+            'project': forms.Select(attrs=imput_syle),
+            'parent': forms.Select(attrs=imput_syle),
+        }
+
+class SubTaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'assignee', 'state', 'project', 'parent']
+        widgets = {
+            'title': forms.TextInput(attrs=imput_syle),
+            'description': CKEditorWidget(),
+            'assignee': forms.Select(attrs=imput_syle),
+            'state': forms.Select(attrs=imput_syle),
+            'project': forms.Select(attrs=imput_syle),
+            'parent': forms.Select(attrs=imput_syle),
+        }
+
+
+class TaskCreateForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'assignee', 'state', 'project']
+        widgets = {
+            'title': forms.TextInput(attrs=imput_syle),
+            'description': CKEditorWidget(),
+            'assignee': forms.Select(attrs=imput_syle),
+            'state': forms.Select(attrs=imput_syle),
+            'project': forms.Select(attrs=imput_syle),
         }
 
 class TaskCreateForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['title', 'description', 'asignee', 'state', 'project']
+        fields = ['title', 'description', 'assignee', 'state', 'project']
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Título de la tarea'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descripción de la tarea', 'rows': 4}),
-            'asignee': forms.Select(attrs={'class': 'form-control'}),
-            'state': forms.Select(attrs={'class': 'form-control'}),
-            'project': forms.Select(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs=imput_syle),
+            'description': CKEditorWidget(),
+            'assignee': forms.Select(attrs=imput_syle),
+            'state': forms.Select(attrs=imput_syle),
+            'project': forms.Select(attrs=imput_syle),
+        }
+
+class ProjectCreateForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title', 'state', 'description']
+        widgets = {
+            'title': forms.TextInput(attrs=imput_syle),
+            'state': forms.Select(attrs=imput_syle),
+            'description': CKEditorWidget(),
+        }
+
+class ProjectEditForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title', 'state', 'type', 'description']
+        widgets = {
+            'title': forms.TextInput(attrs=imput_syle),
+            'state': forms.Select(attrs=imput_syle),
+            'type': forms.Select(attrs=imput_syle),
+            'description': CKEditorWidget(attrs=imput_syle)
         }

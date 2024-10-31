@@ -1,34 +1,44 @@
 <!-- templates/projects/task_list.html -->
 {% extends 'base.html' %}
-{% load static %}
-{% block title %}Listado de proyectos{% endblock %}
+{% block title %}Proyectos{% endblock %}
 
 {% block content %}
 <div class="toolbar">
-    <label class="labeltitle">Listado de proyectos</label>
-    <div>
-        <a class="button_new" href="{% url 'new_project' %}">Nuevo proyecto</a>
-    </div>
-    <form id="changelist-search" method="get" role="search">
-        <div><!-- DIV needed for valid HTML -->
-            <label for="searchbar"><img src="/static/admin/img/search.svg" alt="Search"></label>
-            <input type="text" size="40" name="q" value="" id="searchbar">
-            <input type="submit" value="Search">
+    <div class="in_line">
+        <div class="space">
+            <label class="labeltitle">Proyectos</label>
         </div>
+        <div class="new">
+            <a class="addlink" href="{% url 'new_project' %}">Nuevo</a>
+        </div>
+    </div>
+    <div class="in_line">
+        <form id="changelist-search" method="get" role="search">
+            <div class="search">
+                <input type="text" size="40" name="q" value="" id="searchbar">
+                <input type="submit" value="Buscar">
+            </div>
 
-    </form>
+        </form>
+    </div>
 </div>
 
 <div class="titlerow">
-    <div>Proyecto</div>
+    <div style="width: 55%;">Proyecto</div>
+    <div style="width: 15%;">Tipo</div>
+    <div style="width: 15%;">Estado</div>
+    <div style="width: 15%;">Modificado</div>
 </div>
 
 {% for project in projects %}
-    <div class="row">
-        <div>
-            <a href="{% url 'task_list' project.id %}">{{ project.title }}</a>
+    <a href="{% url 'edit_project' project.id %}" style="text-decoration: none;">
+        <div class="row">
+            <div style="width: 55%;">{{ project.title }}</div>
+            <div style="width: 15%;">{{ project.type }}</div>
+            <div style="width: 15%;">{{ project.state }}</div>
+            <div style="width: 15%;">{{ project.last_update|date:"d/m/Y H:i" }}</div>
         </div>
-    </div>
+    </a>
 {% endfor %}
 {% if not projects %}
 
